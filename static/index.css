@@ -1,18 +1,26 @@
+@media (min-width: 768px) {
+    #arrow {
+        max-width: 600px;
+    }
+}
+@media (max-width: 767px) {
+    #arrow {
+        max-width: 100%;
+    }
+}
 body {
     height: 100vh;
 }
 .container {
+    padding: 5px;
     text-align: center;
 }
 .arrowContainer {
-    padding: 40px;
+    padding: 10px;
 }
 .progress-bar {
     -webkit-transition: none !important;
     transition: none !important;
-}
-.btn {
-    width: 100%;
 }
 #timer {
     font-size: 3em;
@@ -20,16 +28,3 @@ body {
 #seconds, #tens {
     font-family: 'Courier New', Courier, monospace;
 }
-/* Set the maximum width of the arrow image to 200px on desktop */
-@media (min-width: 768px) {
-    #arrow {
-      max-width: 600px;
-    }
-  }
-  
-  /* Set the maximum width of the arrow image to 100% on mobile */
-  @media (max-width: 767px) {
-    #arrow {
-      max-width: 100%;
-    }
-  }  

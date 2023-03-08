@@ -1,19 +1,9 @@
-let fourArrows = ['up', 'right', 'down', 'left']
 let eightArrows = ['up', 'right', 'down', 'left', 'up-right', 'up-left', 'down-right', 'down-left']
-let colors = [
-    '#0d6efd',
-    '#0d6efd',
-    '#0d6efd',
-    '#0d6efd',
-    '#dc3545',
-    '#dc3545',
-    '#dc3545',
-    '#dc3545',
-]
 let directions = 4
 let userSeconds = 1
 let seconds = 1
 let tens = 0
+let prevRandom = 0
 let interval
 
 const arrow = document.getElementById("arrow")
@@ -42,10 +32,6 @@ intervalSelect.addEventListener('change', (event) => {
     tens = 0
 })
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
 buttonStart.onclick = function() {
     clearInterval(interval)
     interval = setInterval(startTimer, 10)
@@ -55,13 +41,18 @@ buttonStop.onclick = function() {
     clearInterval(interval)
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
 function displayArrow() {
     let random = getRandomInt(directions)
-    if (directions === 4) {
-        arrow.src = './static/arrows/' + fourArrows[random] + '.png'
-    } else {
-        arrow.src = './static/arrows/' + eightArrows[random] + '.png'
+    while (random === prevRandom) {
+        random = getRandomInt(directions)
     }
+    prevRandom = random
+    arrow.src = './static/arrows/' + eightArrows[random] + '.png'
+
     if (random >= 4) {
         progress.classList.add('bg-danger')
     } else {
@@ -69,13 +60,13 @@ function displayArrow() {
     }
 }
 
-function updateProgress() {
+function updateProgressBar() {
     progress.style.width = ((tens + (seconds * 100)) / (userSeconds)) + '%'
 }   
 
 function startTimer () {
     tens--
-    updateProgress()
+    updateProgressBar()
     if(tens <= 9) {
         appendTens.innerHTML = "0" + tens
     }
@@ -98,6 +89,4 @@ function startTimer () {
     if (seconds > 9){
         appendSeconds.innerHTML = seconds
     }
-
 }
-
